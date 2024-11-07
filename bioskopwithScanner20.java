@@ -7,49 +7,59 @@ public class bioskopwithScanner20 {
         int baris, kolom;
         String nama, next;
 
-        
         String[][] penonton = new String[4][2];
 
         while (true) {
-            
             System.out.println("\n--- Menu ---");
             System.out.println("1. Input data penonton");
             System.out.println("2. Tampilkan daftar penonton");
             System.out.print("Pilih menu (1/2): ");
             int pilihan = sc.nextInt();
             sc.nextLine(); 
-
             if (pilihan == 1) {
-                
                 System.out.print("Masukkan nama: ");
                 nama = sc.nextLine();
 
-                
-                while (true) {
-                    System.out.print("Masukkan baris (1-4): ");
-                    baris = sc.nextInt();
-                    if (baris >= 1 && baris <= 4) {
-                        break; 
-                    } else {
-                        System.out.println("Baris tidak valid! Harap masukkan nilai antara 1 dan 4.");
-                    }
-                }
+                boolean kursiTersedia = false;
 
-             
-                while (true) {
-                    System.out.print("Masukkan kolom (1-2): ");
-                    kolom = sc.nextInt();
-                    if (kolom >= 1 && kolom <= 2) {
-                        break; 
+                while (!kursiTersedia) {
+                  
+                    while (true) {
+                        System.out.print("Masukkan baris (1-4): ");
+                        baris = sc.nextInt();
+                        if (baris >= 1 && baris <= 4) {
+                            break; 
+                        } else {
+                            System.out.println("Baris tidak valid! Harap masukkan nilai antara 1 dan 4.");
+                        }
+                    }
+
+                   
+                    while (true) {
+                        System.out.print("Masukkan kolom (1-2): ");
+                        kolom = sc.nextInt();
+                        if (kolom >= 1 && kolom <= 2) {
+                            break;
+                        } else {
+                            System.out.println("Kolom tidak valid! Harap masukkan nilai antara 1 dan 2.");
+                        }
+                    }
+                    sc.nextLine(); 
+
+                   
+                    if (penonton[baris - 1][kolom - 1] != null) {
+                        System.out.println("Peringatan: Kursi Baris " + baris + ", Kolom " + kolom + " sudah terisi!");
+                        System.out.println("Silakan pilih kursi yang lain.");
                     } else {
-                        System.out.println("Kolom tidak valid! Harap masukkan nilai antara 1 dan 2.");
+                      
+                        penonton[baris - 1][kolom - 1] = nama;
+                        System.out.println("Penonton berhasil ditambahkan!");
+                        kursiTersedia = true; 
                     }
                 }
-                sc.nextLine(); 
-                penonton[baris - 1][kolom - 1] = nama;
-                System.out.println("Penonton berhasil ditambahkan!");
 
             } else if (pilihan == 2) {
+  
                 System.out.println("\nDaftar Penonton:");
                 boolean adaPenonton = false;
                 for (int i = 0; i < penonton.length; i++) {
@@ -67,6 +77,8 @@ public class bioskopwithScanner20 {
             } else {
                 System.out.println("Pilihan tidak valid. Silakan pilih menu 1 atau 2.");
             }
+
+
             System.out.print("\nIngin melanjutkan? (y/n): ");
             next = sc.nextLine();
             if (next.equalsIgnoreCase("n")) {
